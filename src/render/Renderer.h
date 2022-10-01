@@ -8,21 +8,23 @@
 #include <map>
 #include <string>
 #include <memory>
+#include <vector>
 
 class Renderer {
 private:
     void Init();
 
-    GLFWwindow *window{};
+    GLFWwindow* window = nullptr;
     ImVec4 clearColor{0, 0, 0, 0};
     bool open{true};
-    std::map<std::string, ImFont *> fonts;
 public:
     Renderer();
 
     ~Renderer();
 
     void Render();
+
+    static inline std::map<std::string, ImFont*> fonts;
 };
 
 
