@@ -5,16 +5,6 @@
 
 namespace wundergroundData {
     using nlohmann::json;
-    inline json get_untyped(const json& j, const char* property) {
-        if (j.find(property) != j.end()) {
-            return j.at(property).get<json>();
-        }
-        return {};
-    }
-
-    inline json get_untyped(const json& j, std::string property) {
-        return get_untyped(j, property.data());
-    }
 
     struct metric {
         float tempHigh;
@@ -112,6 +102,5 @@ namespace wundergroundData {
         x.observations = j.at("observations").get<std::vector<wundergroundData::observation>>();
     }
 }
-
 
 #endif //WEATHER_WIDGET_WUNDERGROUNDDATASCHEMA_H

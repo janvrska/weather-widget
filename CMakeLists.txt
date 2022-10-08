@@ -3,7 +3,7 @@ project(weather_widget)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(weather_widget src/main.cpp src/render/Renderer.cpp src/render/Renderer.h src/abstract/AWeatherPlot.cpp src/abstract/AWeatherPlot.h src/plot/TemperaturePlot.cpp src/plot/TemperaturePlot.h src/abstract/ADataProvider.cpp src/abstract/ADataProvider.h src/abstract/AApiDataProvider.cpp src/abstract/AApiDataProvider.h src/data/api/WundergroundDataProvider.cpp src/data/api/WundergroundDataProvider.h src/data/WundergroundDataSchema.h)
+add_executable(weather_widget src/main.cpp src/render/Renderer.cpp src/render/Renderer.h src/abstract/AWeatherPlot.cpp src/abstract/AWeatherPlot.h src/plot/TemperaturePlot.cpp src/plot/TemperaturePlot.h src/abstract/ADataProvider.cpp src/abstract/ADataProvider.h src/abstract/AApiDataProvider.cpp src/abstract/AApiDataProvider.h src/data/api/WundergroundDataProvider.cpp src/data/api/WundergroundDataProvider.h src/data/WundergroundDataSchema.h src/plot/HumidityPlot.cpp src/plot/HumidityPlot.h src/config/ConfigFileManager.cpp src/config/ConfigFileManager.h src/config/Config.h)
 find_package(imgui REQUIRED)
 
 find_package(GLEW REQUIRED)

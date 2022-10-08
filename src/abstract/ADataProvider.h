@@ -7,7 +7,6 @@
 class ADataProvider {
 public:
     virtual const std::vector<float>& GetData(const std::string& type) const = 0;
-
     virtual ~ADataProvider() = default;
 };
 

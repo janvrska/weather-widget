@@ -17,7 +17,6 @@ public:
     ) : title(plotTitle), unit(plotUnit), dataProvider(plotDataProvider) {}
 
     virtual void CreatePlot() const = 0;
-
     virtual ~AWeatherPlot() = default;
 };
 

@@ -9,19 +9,21 @@
 
 class WundergroundDataProvider : public AApiDataProvider {
 private:
-    const char* apiKey{""};
-    const char* baseUrl{""};
-    const char* pwsId{""};
-    std::vector<float> temperatureData{};
+    std::string& apiKey;
+    std::string& pwsId;
+    std::vector<float> temperatureData;
+    std::vector<float> humidityData;
+    std::thread refreshThread;
 protected:
     cpr::Response Request() const override;
     void ProcessResponseData(std::string responseData) override;
-    void RefreshData() override;
 public:
     const std::vector<float>& GetData(const std::string& type) const override;
-    std::thread CreateRefreshThread() override;
+    void CreateRefreshThread() override;
+    bool RefreshData(bool oneTimeRefresh) override;
     ~WundergroundDataProvider() override = default;
-};
 
+    WundergroundDataProvider(std::string& key, std::string& pws) : apiKey(key), pwsId(pws) {};
+};
 
 #endif //WEATHER_WIDGET_WUNDERGROUNDDATAPROVIDER_H

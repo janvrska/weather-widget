@@ -13,19 +13,16 @@
 class Renderer {
 private:
     void Init();
-
     GLFWwindow* window = nullptr;
-    ImVec4 clearColor{0, 0, 0, 0};
-    bool open{true};
+    const ImVec4 clearColor{0, 0, 0, 0};
 public:
     Renderer();
-
     ~Renderer();
-
     void Render();
-
     static inline std::map<std::string, ImFont*> fonts;
+    static const int plotHeight{100};
+    static const int windowHeight{330};
+    static const int windowWidth{200};
 };
-
 
 #endif //WEATHER_WIDGET_RENDERER_H
