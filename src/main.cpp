@@ -4,7 +4,9 @@
 
 int main() {
     try {
-        ::ShowWindow(::GetConsoleWindow(), SW_HIDE);
+        ShowWindow(GetConsoleWindow(), SW_HIDE);
+        FreeConsole();
+
         Renderer renderer;
         renderer.Render();
     } catch (std::exception& e) {

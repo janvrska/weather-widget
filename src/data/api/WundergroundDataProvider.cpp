@@ -50,7 +50,7 @@ void WundergroundDataProvider::ProcessResponseData(std::string responseData) {
 bool WundergroundDataProvider::RefreshData(bool oneTimeRefresh) {
     while (true) {
 
-        if((apiKey.length() == 0 && pwsId.length() == 0) && !oneTimeRefresh) {
+        if ((apiKey.length() == 0 && pwsId.length() == 0) && !oneTimeRefresh) {
             std::this_thread::sleep_for(std::chrono::milliseconds(1000 * 300));
             continue;
         }

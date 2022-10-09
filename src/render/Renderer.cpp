@@ -47,14 +47,8 @@ void Renderer::Init() {
 
     ImGuiIO& io = ImGui::GetIO();
 
-#ifdef NDEBUG
     fonts.insert({"regular", io.Fonts->AddFontFromFileTTF(FONTS"Roboto-Regular.ttf", 15)});
     fonts.insert({"light", io.Fonts->AddFontFromFileTTF(FONTS"Roboto-Light.ttf", 50)});
-#else
-    fonts.insert({"regular", io.Fonts->AddFontFromFileTTF(FONTS"Roboto-Regular.ttf", 15)});
-    fonts.insert({"light", io.Fonts->AddFontFromFileTTF(FONTS"Roboto-Light.ttf", 50)});
-#endif
-
 }
 
 Renderer::~Renderer() {
@@ -84,7 +78,6 @@ void Renderer::Render() {
     TemperaturePlot temperaturePlot = TemperaturePlot(temperaturePlotTitle, temperaturePlotUnit,
                                                       wundergroundDataProvider);
     HumidityPlot humidityPlot = HumidityPlot(humidityPlotTitle, humidityPlotUnit, wundergroundDataProvider);
-
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
