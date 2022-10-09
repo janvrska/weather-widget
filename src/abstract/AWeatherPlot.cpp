@@ -8,7 +8,7 @@
 void AWeatherPlot::CreatePlot() const {
     const std::vector<float> plotData = dataProvider.GetData(title);
 
-    if(plotData.empty()){
+    if (plotData.empty()) {
         return;
     }
 
@@ -24,7 +24,7 @@ void AWeatherPlot::CreatePlot() const {
                 nullptr,
                 nullptr,
                 ImPlotAxisFlags_NoDecorations | ImPlotAxisFlags_AutoFit,
-                ImPlotAxisFlags_NoDecorations | ImPlotAxisFlags_AuxDefault
+                ImPlotAxisFlags_NoDecorations
         );
 
         ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, 0.7f);
@@ -46,7 +46,7 @@ void AWeatherPlot::CreatePlot() const {
 
         std::string plotText{plotValue + unit};
 
-        ImPlot::PlotText(plotText.c_str(), (plotData.size() / 2.0) - 0.5, ((max - min) / 2) + min);
+        ImPlot::PlotText(plotText.c_str(), (plotData.size() / 2.0), ((max - min) / 2) + min);
         ImGui::PopFont();
 
         ImPlot::EndPlot();

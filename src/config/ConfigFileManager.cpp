@@ -1,6 +1,7 @@
 #include "ConfigFileManager.h"
 #include <nlohmann/json.hpp>
 #include <fstream>
+#include <iostream>
 
 using nlohmann::json;
 
@@ -23,7 +24,7 @@ Config ConfigFileManager::LoadConfigData() {
         ns::from_json(j, config);
         i.close();
     } catch (std::exception& e) {
-
+        std::cerr << e.what() << "\n";
     }
 
     return config;

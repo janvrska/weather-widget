@@ -3,6 +3,7 @@
 #include <cpr/cpr.h>
 #include <nlohmann/json.hpp>
 #include <format>
+#include <iostream>
 
 using nlohmann::json;
 
@@ -19,12 +20,20 @@ const std::vector<float>& WundergroundDataProvider::GetData(const std::string& t
 }
 
 cpr::Response WundergroundDataProvider::Request() const {
-    const std::string url = std::format("https://api.weather.com/v2/pws/observations/all/1day?stationId={}&format=json&units=m&numericPrecision=decimal&apiKey={}",pwsId,apiKey);
+    const std::string url = std::format(
+            "https://api.weather.com/v2/pws/observations/all/1day?stationId={}&format=json&units=m&numericPrecision=decimal&apiKey={}",
+            pwsId, apiKey);
     return cpr::Get(cpr::Url{url});
 }
 
 void WundergroundDataProvider::ProcessResponseData(std::string responseData) {
-    wundergroundData::apiObject apiData = json::parse(responseData);
+
+    wundergroundData::apiObject apiData;
+    try {
+        apiData = json::parse(responseData);
+    } catch (std::exception& e) {
+        std::cerr << e.what() << "\n";
+    }
 
     std::vector<float> tempDataTemperature;
     std::vector<float> tempDataHumidity;
@@ -51,12 +60,12 @@ bool WundergroundDataProvider::RefreshData(bool oneTimeRefresh) {
                 return false;
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000*300));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000 * 300));
     }
 }
 
 void WundergroundDataProvider::CreateRefreshThread() {
-    if(!refreshThread.joinable()) {
+    if (!refreshThread.joinable()) {
         refreshThread = std::thread([this] { this->RefreshData(false); });
     }
 }

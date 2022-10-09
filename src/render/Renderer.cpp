@@ -79,6 +79,7 @@ void Renderer::Render() {
                                                       wundergroundDataProvider);
     HumidityPlot humidityPlot = HumidityPlot(humidityPlotTitle, humidityPlotUnit, wundergroundDataProvider);
 
+
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
