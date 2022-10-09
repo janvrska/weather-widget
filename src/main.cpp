@@ -1,6 +1,5 @@
 #include <iostream>
 #include <Windows.h>
-#include <wincon.h>
 #include "render/Renderer.h"
 
 int main() {

@@ -49,6 +49,12 @@ void WundergroundDataProvider::ProcessResponseData(std::string responseData) {
 
 bool WundergroundDataProvider::RefreshData(bool oneTimeRefresh) {
     while (true) {
+
+        if((apiKey.length() == 0 && pwsId.length() == 0) && !oneTimeRefresh) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000 * 300));
+            continue;
+        }
+
         cpr::Response response = Request();
 
         if (response.status_code == 200) {

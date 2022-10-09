@@ -47,8 +47,14 @@ void Renderer::Init() {
 
     ImGuiIO& io = ImGui::GetIO();
 
-    fonts.insert({"regular", io.Fonts->AddFontFromFileTTF("../fonts/Roboto-Regular.ttf", 15)});
-    fonts.insert({"light", io.Fonts->AddFontFromFileTTF("../fonts/Roboto-Light.ttf", 50)});
+#ifdef NDEBUG
+    fonts.insert({"regular", io.Fonts->AddFontFromFileTTF(FONTS"Roboto-Regular.ttf", 15)});
+    fonts.insert({"light", io.Fonts->AddFontFromFileTTF(FONTS"Roboto-Light.ttf", 50)});
+#else
+    fonts.insert({"regular", io.Fonts->AddFontFromFileTTF(FONTS"Roboto-Regular.ttf", 15)});
+    fonts.insert({"light", io.Fonts->AddFontFromFileTTF(FONTS"Roboto-Light.ttf", 50)});
+#endif
+
 }
 
 Renderer::~Renderer() {
@@ -109,11 +115,11 @@ void Renderer::Render() {
         ImGui::SetWindowSize(ImVec2{static_cast<float>(windowWidth), 130});
         ImGui::SetWindowPos(ImVec2{0, static_cast<float>(plotHeight * 2)});
 
-        ImGui::PushItemWidth(static_cast<float>(windowWidth) - 10);
+        ImGui::PushItemWidth(static_cast<float>(windowWidth) - buttonPadding);
         ImGui::InputTextWithHint("##", "Wunderground API key", &apiKey, ImGuiInputTextFlags_CallbackCharFilter);
         ImGui::InputTextWithHint("###", "PWS ID", &pwsId, ImGuiInputTextFlags_CallbackCharFilter);
 
-        if (ImGui::Button("Save", ImVec2{static_cast<float>(windowWidth - 10), 30})) {
+        if (ImGui::Button("Save", ImVec2{static_cast<float>(windowWidth - buttonPadding), 30})) {
             config.apiKey = apiKey;
             config.pwsId = pwsId;
             ConfigFileManager::SaveConfigData(config);
@@ -126,7 +132,7 @@ void Renderer::Render() {
             ImGui::SetWindowSize(ImVec2{static_cast<float>(windowWidth), 90});
             ImGui::SetWindowPos(ImVec2{0, 0});
             ImGui::Text("Check your API key and PWS ID");
-            if (ImGui::Button("Ok", ImVec2{static_cast<float>(windowWidth - 10), 30})) {
+            if (ImGui::Button("Ok", ImVec2{static_cast<float>(windowWidth - buttonPadding), 30})) {
                 ImGui::CloseCurrentPopup();
             }
             ImGui::EndPopup();

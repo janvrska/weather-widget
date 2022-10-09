@@ -20,6 +20,16 @@ target_link_libraries(weather_widget PRIVATE cpr::cpr)
 find_package(nlohmann_json CONFIG REQUIRED)
 target_link_libraries(weather_widget PRIVATE nlohmann_json::nlohmann_json)
 
+target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_INCLUDE})
+target_compile_definitions(${PROJECT_NAME} PUBLIC FONTS="${CMAKE_CURRENT_SOURCE_DIR}/fonts/")
+
+set(PROJECT_INCLUDE "${CMAKE_CURRENT_LIST_DIR}/fonts/")
+
+add_custom_target(copy_assets
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/fonts ${CMAKE_CURRENT_BINARY_DIR}/fonts
+        )
+add_dependencies(weather_widget copy_assets)
+
 if (MSVC)
     add_compile_options(/W4 /WX)
 else()

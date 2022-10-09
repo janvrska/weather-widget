@@ -23,6 +23,7 @@ public:
     static const int plotHeight{100};
     static const int windowHeight{330};
     static const int windowWidth{200};
+    static const int buttonPadding{10};
 };
 
 #endif //WEATHER_WIDGET_RENDERER_H
